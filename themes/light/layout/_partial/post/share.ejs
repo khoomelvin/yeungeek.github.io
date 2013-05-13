@@ -1,0 +1,33 @@
+<% if (theme.addthis.enable){ %>
+  <div class="addthis addthis_toolbox addthis_default_style">
+    <% if (theme.addthis.facebook){ %>
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    <% } %>
+    <% if (theme.addthis.twitter){ %>
+      <a class="addthis_button_tweet"></a>
+    <% } %>
+    <% if (theme.addthis.google){ %>
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <% } %>
+    <% if (theme.addthis.pinterest){ %>
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    <% } %>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+	 <!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+<a class="bds_qzone"></a>
+<a class="bds_tsina"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<span class="bds_more"></span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=991390" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+<% } %>
