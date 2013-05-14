@@ -3,6 +3,3 @@ node_modules
 db.json
 *.public
 themes/damnclean/*
-# Ignore everything in this directory 
-* 
-# Except this file !.gitignore 
