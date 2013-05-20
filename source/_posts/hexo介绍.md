@@ -69,13 +69,15 @@ hexo new photo "New Gallery"
 {% endcodeblock %}
 
 2.生成静态文件
-{% codeblock lang:linux %}hexo generate
+{% codeblock lang:linux %}
+hexo generate
 {% endcodeblock %}
-输入[http://localhost:4000](http://localhost:4000) 预览
 
 3.启动服务器
-{% codeblock lang:linux %}hexo server
+{% codeblock lang:linux %}
+hexo server
 {% endcodeblock %}
+输入[http://localhost:4000](http://localhost:4000) 预览<br>
 
 4.部署
 {% codeblock lang:linux %}hexo deploy

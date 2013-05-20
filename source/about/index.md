@@ -1,4 +1,4 @@
-﻿title: About Me
+title: About Me
 date: 2013-05-13 20:34:21
 ---
 这是Yeungeek的个人站点. <br>
@@ -9,7 +9,7 @@ date: 2013-05-13 20:34:21
 
 更多了解：<br>
 - [github](https://github.com/yeungeek) <br>
-- twitter <br>
+- [twitter](https://twitter.com/yeungeek) <br>
 - [微博](http://weibo.com/springyounger) <br>
 - [stackoverflow](http://stackoverflow.com/users/943667/yeungeek) <br>
 - [segmentfault](http://segmentfault.com/u/yeungeek) <br>
