@@ -16,4 +16,4 @@ date: 2013-05-13 20:34:21
 - [eoe](http://my.eoe.cn/128392)
 
 
-{% img left http://pic.yupoo.com/yeungeek/CRoGq21A/medish.jpg %}
+{% img left http://pic.yupoo.com/yeungeek/CSyolOPx/medish.jpg %}
