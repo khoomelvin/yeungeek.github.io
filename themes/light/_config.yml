@@ -8,12 +8,11 @@ widgets:
 - search
 - category
 - tag
-- twitter
 
 excerpt_link: Read More
 
 twitter:
-  username: yeungeek
+  username: 
   show_replies: false
   tweet_count: 5
 
@@ -29,3 +28,5 @@ fancybox: true
 
 google_analytics:
 rss:
+
+weibo: true
