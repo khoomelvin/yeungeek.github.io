@@ -7,7 +7,7 @@ menu:
 widgets: 
 - search
 - category
-- tag
+- tagcloud
 
 excerpt_link: Read More
 
@@ -23,6 +23,7 @@ addthis:
   twitter: false
   google: false
   pinterest: false
+  alimama: true
 
 fancybox: true
 
