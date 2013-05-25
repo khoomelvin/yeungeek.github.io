@@ -8,6 +8,7 @@ widgets:
 - search
 - category
 - tagcloud
+- blogroll
 
 excerpt_link: Read More
 
