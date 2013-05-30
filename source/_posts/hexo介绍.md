@@ -21,7 +21,7 @@ Hexo这是一位台湾的同学 [@tommy351](https://github.com/tommy351)基于No
 本博客使用了默认的主题：[hexo-theme-light](https://github.com/tommy351/hexo-theme-light)。<br>
 有很多的特性：<br>
 **1.Gallery Post**
-{% img http://pic.yupoo.com/yeungeek/CRn2TVmO/vU2OV.jpg %}<br>
+![](http://pic.yupoo.com/yeungeek/CRn2TVmO/vU2OV.jpg)
 <!-- more -->
 ```
 ---
