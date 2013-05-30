@@ -78,6 +78,7 @@ theme: light
 exclude_generator:
 plugins:
 - hexo-generator-sitemap
+- hexo-generator-feed
 
 # Deployment
 ## Docs: http://zespia.tw/hexo/docs/deploy.html
