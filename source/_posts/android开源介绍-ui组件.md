@@ -2,7 +2,7 @@ layout: photo
 title: Android开源介绍-UI组件
 date: 2013-05-26 11:43:08
 tags: [Android,UI]
-categories: [Android,Android开源]
+categories: [Android开源]
 photos:
 - http://static.oschina.net/uploads/img/201112/27095841_C0fm.png
 - https://raw.github.com/JakeWharton/Android-ViewPagerIndicator/master/sample/screens.png

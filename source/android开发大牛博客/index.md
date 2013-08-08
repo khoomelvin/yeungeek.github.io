@@ -2,7 +2,7 @@ title: Android开发大牛博客
 date: 2013-05-30 11:22:32
 ---
 排名不分先后<br>
-###[CSDN博文精选：Android系列开发博客资源汇总](http://www.csdn.net/article/2011-08-30/303833)###
+###<a href="http://www.csdn.net/article/2011-08-30/303833" target="_blank">CSDN博文精选：Android系列开发博客资源汇总</a>###
 很多已经和下面的有了重复
 
 ###[老罗的Android之旅(CSDN)](http://blog.csdn.net/luoshengyang)###
