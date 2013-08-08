@@ -28,12 +28,12 @@ photos:
 {% endblockquote %}
 
 ## 1. [ActionBarSherlock](https://github.com/JakeWharton/ActionBarSherlock) ##
+<!-- more -->
 {% img http://actionbarsherlock.com/static/logo.png %}<br>
 在3.0之前使用ActionBar，ActionBarSherlock提供了很好的兼容。ActionBarSherlock 是Android compatibility library 的一个扩展,ActionBarSherlock 被设计成通过一个API就能够很方便使用所有版本的Android操作栏的设计模式.<br>
 对于Android 4.0及更高版本，ActionBarSherlock可以自动使用本地ActionBar实现，而对于之前没有ActionBar功能的版本，基于Ice Cream Sandwich的自定义动作栏实现将自动围绕布局。能够让开发者轻松开发一款带动作栏（Action bar）的应用，并且适用于Android 2.x及其以上所有版本。<br>
 这个是Android牛人开发的一个开源组件，关注[JakeWharton](https://github.com/JakeWharton)，你会有更多惊喜。<br>
 {% gist 5616899 %}
-<!-- more -->
 
 ## 2. [Android-ViewPagerIndicator](https://github.com/JakeWharton/Android-ViewPagerIndicator) ##
 这个又是[JakeWharton](https://github.com/JakeWharton)的杰作，说过了关注他，会有惊喜。<br>

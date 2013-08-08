@@ -30,6 +30,6 @@ addthis:
 fancybox: true
 
 google_analytics:
-rss:
+rss: atom.xml
 
 weibo: true

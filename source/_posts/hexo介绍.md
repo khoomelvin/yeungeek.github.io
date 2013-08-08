@@ -15,6 +15,7 @@ Cyrax 使用Jinja2模板引擎的生成器<br>
 Phrozn PHP语言实现的静态网站<br>
 **4.JS**<br>
 `Hexo`<br>
+<!-- more -->
 刚开始我也有用Octopress，生成非常的方便，但一直有个问题，中文分类搞得我头疼，虽然后面2.1版本已经解决了，后来不经意之间发现了Hexo。
 ## Hexo ##
 Hexo这是一位台湾的同学 [@tommy351](https://github.com/tommy351)基于Node的静态博客网站生成器，目前已经发布到[1.1.3](https://github.com/tommy351/hexo/tree/1.1.3)。<br>
@@ -22,7 +23,6 @@ Hexo这是一位台湾的同学 [@tommy351](https://github.com/tommy351)基于No
 有很多的特性：<br>
 **1.Gallery Post**
 ![](http://pic.yupoo.com/yeungeek/CRn2TVmO/vU2OV.jpg)
-<!-- more -->
 ```
 ---
 layout: photo

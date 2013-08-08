@@ -19,12 +19,11 @@ tags: [Markdown,Github,Git]
     1. 代码
     1. 图片
 -   <a href="#editor">Markdown 免费编辑器</a>
-
+<!-- more -->
 ## <a name="overview">概述</a>
 Markdown 的目标是实现「易读易写」。<br/>
 说到底就是轻量级别的，可以随时方便改动，可以生成相应的Html。最重要的一点就是现在很多博客系统直接支持Markdown语法。<br/>
 接下来介绍Markdown的基本语法，对，没错，是基本。
-<!-- more -->
 ## <a name="block">区块元素</a> 
 ### 段落和换行
 一个 Markdown 段落是由一个或多个连续的文本行组成<br/>
