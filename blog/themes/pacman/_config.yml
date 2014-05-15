@@ -61,13 +61,13 @@ fancybox: true
 
 #### Author information
 author:
-  google_plus: https://plus.google.com/u/0/100870093913089422348   ## eg:116338260303228776998 for https://plus.google.com/u/0/116338260303228776998
-  intro_line1:"Hello,I'm yeungeek in Huanba." ## eg: "Hello ,I'm Larry Page in Google."
-  intro_line2: "This is my blog,if you like,enjoy it." ## eg: "This is my blog,believe it or not."
-  weibo: http://weibo.com/springyounger  ## e.g. 436062867 for http://weibo.com/436062867
-  twitter: https://twitter.com/yeungeek    ## e.g. yangjiansky for https://twitter.com/yangjiansky
-  github: https://github.com/yeungeek     ## e.g. A-limon for https://github.com/A-limon
-  facebook: http://www.facebook.com/yeungeek  ## e.g. yangjian for https://favebook.com/yangjian
+  google_plus: 100870093913089422348   ## eg:116338260303228776998 for https://plus.google.com/u/0/116338260303228776998
+  intro_line1: "Hello, I'm yeungeek in Huanba." ## eg: "Hello ,I'm Larry Page in Google."
+  intro_line2: "This is my blog, if you like, enjoy it." ## eg: "This is my blog,believe it or not."
+  weibo: springyounger  ## e.g. 436062867 for http://weibo.com/436062867
+  twitter: yeungeek    ## e.g. yangjiansky for https://twitter.com/yangjiansky
+  github: yeungeek     ## e.g. A-limon for https://github.com/A-limon
+  facebook: yeungeek  ## e.g. yangjian for https://favebook.com/yangjian
   tsina: 1747569744     ## e.g. 1664838973  Your weibo ID,It will be used in share button.
 
 #### Comment
