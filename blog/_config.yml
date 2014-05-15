@@ -3,12 +3,12 @@
 ## Source: https://github.com/tommy351/hexo/
 
 # Site
-title: Hexo
-subtitle:
+title: Android 沉思录
+subtitle: It's my Androad
 description:
-author: John Doe
-email:
-language:
+author: yeungeek
+email: yeungeek@gmail.com
+language: zh_CN
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -80,7 +80,7 @@ disqus_shortname:
 # Extensions
 ## Plugins: https://github.com/tommy351/hexo/wiki/Plugins
 ## Themes: https://github.com/tommy351/hexo/wiki/Themes
-theme: landscape
+theme: pacman
 exclude_generator:
 
 # Markdown
@@ -96,7 +96,7 @@ markdown:
 
 # Stylus
 stylus:
-  compress: false
+  compress: true
 
 # Deployment
 ## Docs: http://zespia.tw/hexo/docs/deployment.html
