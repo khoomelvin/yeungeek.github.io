@@ -5,7 +5,7 @@
 # Site
 title: Android 沉思录
 subtitle: It's my Androad
-description:
+description: Androad
 author: yeungeek
 email: yeungeek@gmail.com
 language: zh_CN
@@ -102,6 +102,6 @@ stylus:
 ## Docs: http://zespia.tw/hexo/docs/deployment.html
 deploy:
   type: github
-  repo: git@github.com:yeungeek/yeungeek.github.com.git
+  repository: git@github.com:yeungeek/yeungeek.github.com.git
   branch: master
   message: "yeungeek update site"
