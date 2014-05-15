@@ -104,4 +104,4 @@ deploy:
   type: github
   repo: git@github.com:yeungeek/yeungeek.github.com.git
   branch: master
-  message: yeungeek update site
+  message: "yeungeek update site"
