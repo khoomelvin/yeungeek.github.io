@@ -12,7 +12,7 @@ language: zh_CN
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://yeungeek.com
 root: /
 permalink: :year/:month/:day/:title/
 tag_dir: tags
@@ -101,4 +101,7 @@ stylus:
 # Deployment
 ## Docs: http://zespia.tw/hexo/docs/deployment.html
 deploy:
-  type:
+  type: github
+  repo: git@github.com:yeungeek/yeungeek.github.com.git
+  branch: master
+  message: yeungeek update site
