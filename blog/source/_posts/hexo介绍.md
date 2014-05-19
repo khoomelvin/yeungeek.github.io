@@ -1,6 +1,6 @@
 title: Hexo介绍
 date: 2013-05-14 14:47:04
-tags: [Hexo,Github,Git]
+tags: [Hexo,github,git]
 ---
 ## 选择 ##
   选择[Hexo](https://github.com/tommy351/hexo "Hexo")也是个巧合，最近在看怎么使用github pages来生成网站，官方推荐[Jekyll](http://jekyllrb.com/)（github 默认pages 引擎），还有兼容Jekyll的[Octopress](http://octopress.org/)。<br>
