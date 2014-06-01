@@ -104,7 +104,7 @@ git库中有很多重要的标记，其中最重要的就是称为stage（或者
 ![](http://pic.yupoo.com/yeungeek/DNF9fOeQ/medish.jpg)
 红色的文件，没有提交到暂存区中，使用`git add file` 或者使用`git add -all 路径`，让文件提交到暂存区
 ![](http://pic.yupoo.com/yeungeek/DNF9gN2p/medish.jpg)
-变为绿色，说明文件已经在暂存区。然后，执行`git commit -m message`就可以一次性把暂存区的所有修改提交到分支。一次完整的提交完成。
+变为绿色，说明文件已经在暂存区。然后，执行`git commit -m message`就可以一次性把暂存区的所有修改提交到分支。最后使用`git push`提交,一次完整的git操作完成。
 ###命令小结
 `git status` 查看仓库的状态
 `git log` 查看commit的记录
