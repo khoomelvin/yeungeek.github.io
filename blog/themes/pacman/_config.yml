@@ -1,7 +1,7 @@
 ##### Menu
 menu:
   主页: /
-  存档: /archives
+  开发资源: /awesome-resources
   大牛博客: /android开发大牛博客
   About: /about
 ## you can create `tags` and `categories` folders in `../source`.
