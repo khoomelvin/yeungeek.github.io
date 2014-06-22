@@ -1,8 +1,7 @@
 .DS_Store
-node_modules
+Thumbs.db
 db.json
-*.public
-themes/damnclean/*
+debug.log
+node_modules/
 public/
-*.log
-/.deploy
+.deploy/
