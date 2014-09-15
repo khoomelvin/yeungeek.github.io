@@ -135,16 +135,17 @@ eclipse.project {
     buildCommand 'com.android.ide.eclipse.adt.ApkBuilder'
 }
 ```
-这段内容主要是为了能够生成.classpath和.project  
 
-#eclipse工程更新
+这段内容主要是为了能够生成`.classpath`和`.project`
+
+# eclipse工程更新
+
 在根目录执行 gradle命令  `gradle cleanEclipse eclipse` 重新生成eclipse工程。  
 导入工程，**File -> Import -> General -> Existing Projects into Workspace**.  
 不要使用导入Android工程，不然会修改刚才生成的.project和.classpath。  
-如果遇到eclipse依赖引用问题，可以重新打开工程进行刷新  
+如果遇到eclipse依赖引用问题，可以重新打开工程进行刷新
 
-#完整示例
-
+# 完整示例
 {% gist /yeungeek/85f81d5e73ff178e0f3a %}
 
 
