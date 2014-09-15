@@ -12,7 +12,7 @@ categories:
 直到`gradle`的出现，基于groovy的构建工具，既保持了Maven的优点，又通过使用Groovy定义的DSL，克服了 Maven中使用XML繁冗以及不灵活等缺点。  
 gradle的使用越来越广泛，尤其是在android的构建上，目前android studio就直接支持gradle，为android的开发者提供了便利。  
 不过目前android studio还是beta阶段，使用eclipse的开发者还是相当多，如何让eclipse也支持gradle呢？
-#eclipse生成gradle
+#eclipse生成gradle 
 使用eclipse adt工具，可以让当前的工程生成对应的gradle文件。
 ``` java
 1. Update your Eclipse ADT Plugin (you must have version 22.0 or higher).
@@ -88,11 +88,14 @@ android {
     }
 }
 ```
+
 #eclipse classpath和project生成
 要让eclipse支持gradle，其实就是能够解决依赖的问题，可以通过修改.classpath和.project来解决。
+
 ##增加gradle插件
 `apply plugin: 'maven'` 解析一些依赖  
 `apply plugin: 'eclipse'` 可以编译eclipse工程  
+
 ##build.gradle增加classpath和project支持
 ``` gradle
 ////////////////////// configure eclipse //////////////////////
