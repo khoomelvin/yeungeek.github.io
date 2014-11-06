@@ -15,5 +15,4 @@ date: 2013-05-13 20:34:21
 - [segmentfault](http://segmentfault.com/u/yeungeek) <br>
 - [eoe](http://my.eoe.cn/128392)
 
-
-{% img left http://pic.yupoo.com/yeungeek/CSyolOPx/medish.jpg %}
+![](http://pic.yupoo.com/yeungeek/CSyolOPx/medish.jpg)
