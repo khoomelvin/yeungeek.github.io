@@ -5,4 +5,3 @@ git commit -m 'publish blog' &&
 git push &&
 echo '==== publish blog success ===='
 echo
-
