@@ -76,6 +76,12 @@ pagination_dir: page
 # Disqus
 disqus_shortname:
 
+#plugins
+feed:
+    type: atom
+    path: atom.xml
+    limit: 20
+
 # Extensions
 ## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
 ## Themes: https://github.com/hexojs/hexo/wiki/Themes
