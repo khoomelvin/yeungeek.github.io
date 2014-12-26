@@ -60,7 +60,7 @@ Ctrl+E或者Alt+Shift+C 最近更改的代码
 一些基本的快捷键，如果需要完整的快捷键，可以边学边深入。
 
 #补充
-目前正在mac使用android studio，很多快捷键已经有很多不同，我使用的是Mac OS X 10.5+。  
+目前正在mac使用android studio，很多快捷键不同，我使用的是Mac OS X 10.5+。  
 顺便提醒下，android studio 1.0.2也发布了(12.18)。  
 官网上的下载 [http://developer.android.com/sdk/index.html](http://developer.android.com/sdk/index.html)  
 最新版下载：[http://tools.android.com/download/studio/canary/1-0-2
@@ -70,7 +70,7 @@ Ctrl+E或者Alt+Shift+C 最近更改的代码
 ![image](http://pic.yupoo.com/yeungeek/Ejh26v9O/medish.jpg)
 
 ##快捷键补充(mac) 
-上次对比的是eclipse与studio之间的区别，下面的时studio在各平台之间的差异. 
+上次对比的是eclipse与studio之间的区别，下面的是studio在max和linux平台之间的差异. 
 
 功能 | Mac OSX | Linux
 ----|------|----
@@ -89,7 +89,7 @@ Ctrl+E或者Alt+Shift+C 最近更改的代码
 
 **部分参考[Android Studio系列教程三--快捷键](http://stormzhang.com/devtools/2014/12/09/android-studio-tutorial3/)**
 ##自动导包
-这个功能参考了上面的文档后，发现也很实用，不然每次都需要继续`Alt + Enter`来导入包。  
+这个功能参考了上面的文档后，发现也很实用，不然每次都需要使用`Alt + Enter`来导入包。  
 **Preferences -> Editor -> Auto Import -> Java**，如图：
 
 ![image](http://pic.yupoo.com/yeungeek/EjhcrkHo/medish.jpg)
