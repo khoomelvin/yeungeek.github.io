@@ -1,4 +1,4 @@
-title: Android stuido常用快捷键
+title: Android studio常用快捷键
 date: 2014-06-06 13:50:03
 tags:
 - android
@@ -7,7 +7,7 @@ categories:
 - Android studio
 
 description:
-    
+
 ---
 > Android Studio 是谷歌基于IntelliJ IDEA开发的安卓开发工具，有点类似 Eclipse ADT，Android Studio 提供了集成的 Android 开发工具用于开发和调试，基于Gradle的构建支持。快捷键对于我们来说，可以让工作事半功倍。  
 
@@ -34,7 +34,7 @@ Eclipse中快捷键与Studio中的差别还是比较大，通过对比两者，�
 ||Ctrl+P 方法参数提示
 行操作 | Ctrl+D 删除行 | Ctrl+X 删除行
 ||Ctrl+D 复制行
-定位在某行 | Ctrl+L | 
+定位在某行 | Ctrl+L |
 返回至上次浏览的位置 | Alt+ left/right   | Ctrl+Alt+ left/right(与ubuntu切换视图冲突)
 注释 | Ctrl+/ 注释当前行  | Ctrl+/ 或 Ctrl+Shift+/ （// 或者/*...*/ ）
 
@@ -69,8 +69,8 @@ Ctrl+E或者Alt+Shift+C 最近更改的代码
 
 ![image](http://pic.yupoo.com/yeungeek/Ejh26v9O/medish.jpg)
 
-##快捷键补充(mac) 
-上次对比的是eclipse与studio之间的区别，下面的是studio在max和linux平台之间的差异. 
+##快捷键补充(mac)
+上次对比的是eclipse与studio之间的区别，下面的是studio在max和linux平台之间的差异.
 
 功能 | Mac OSX | Linux
 ----|------|----
@@ -93,6 +93,3 @@ Ctrl+E或者Alt+Shift+C 最近更改的代码
 **Preferences -> Editor -> Auto Import -> Java**，如图：
 
 ![image](http://pic.yupoo.com/yeungeek/EjhcrkHo/medish.jpg)
-
-
-
