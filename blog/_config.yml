@@ -105,7 +105,7 @@ exclude_generator:
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type: github
+  type: git
   repository: git@github.com:yeungeek/yeungeek.github.com.git
   branch: master
   message: "yeungeek update site"
