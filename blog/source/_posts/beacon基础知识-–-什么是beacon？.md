@@ -10,6 +10,8 @@ description:
 ---
 > 很早之前，就听说过Beacon，不过一直没有去了解，前两天在[互联网早读课](http://zaodula.com/)发现了两篇相关文章，让我进一步了解了Beacon为何物。
 
+<!-- more -->
+
 本篇文章转载自：[Beacon基础知识 – 什么是Beacon？20140517早读课
 ](http://zaodula.com/archives/7299.html)。  
 ![](http://cdn.zaodula.com/wp-content/uploads/2014/05/Beacon-20140517.jpg)

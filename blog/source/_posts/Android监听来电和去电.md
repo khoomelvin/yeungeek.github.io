@@ -10,6 +10,7 @@ categories:
 Android在电话状态改变是会发送action为`android.intent.action.PHONE_STATE`的广播，而拨打电话时会发送action为`android.intent.action.NEW_OUTGOING_CALL`的广播。
 来电没有直接广播，通过`android.intent.action.PHONE_STATE`和`android.intent.action.NEW_OUTGOING_CALL`两个进行过滤。  
 思路：如果电话状态改变了，而且接受到的不是NEW_OUTGOING_CALL广播，可以确定是来电状态，以此来区分拨打电话和来电。
+<!-- more -->
 
 ##拨打电话
 注册Intent.ACTION_NEW_OUTGOING_CALL广播

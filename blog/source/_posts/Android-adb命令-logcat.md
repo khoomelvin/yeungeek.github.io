@@ -8,7 +8,7 @@ categories:
 
 ---
   Android日志系统提供了记录和查看系统调试信息的功能。缓冲区可以通过 `adb logcat` 命令来查看和使用。  
-  
+
 #使用logcat命令
   通过logcat命令来查看日志内容，命令行输入:
   ``` android
@@ -18,6 +18,7 @@ categories:
   ``` android
   Usage: logcat [options] [filterspecs]
   ```
+  <!-- more -->
 ##options
   ``` android
   -s              Set default filter to silent.
@@ -44,7 +45,7 @@ categories:
   * -c 清除缓冲区
   * -b 选择缓冲区
   * -B 二进制输出
-  
+
 ###控制日志格式
   日志消息在标记和优先级之外还有很多元数据字段，这些字段可以通过修改输出格式来控制输出结果， -v 选项加上下面列出的内容可以控制输出字段：
   ``` shell
@@ -106,7 +107,7 @@ adb logcat "*:W"
 ###标签和优先级组合过滤
 ``` shell
 adb logcat -s TAG_NAME:PRIORITY  
-adb logcat -s TAG_NAME_1:PRIORITY TAG_NAME_2:PRIORITY` 
+adb logcat -s TAG_NAME_1:PRIORITY TAG_NAME_2:PRIORITY`
 # example  
 adb logcat -s TEST: W
 ```

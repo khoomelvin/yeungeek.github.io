@@ -6,7 +6,7 @@
 # Site
 title: Android 沉思录
 subtitle: It's my Androad
-description: Androad
+description: It's my Androad
 author: yeungeek
 email: yeungeek@gmail.com
 language: zh_CN
@@ -98,7 +98,7 @@ feed:
 # Extensions
 ## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
 ## Themes: https://github.com/hexojs/hexo/wiki/Themes
-theme: pacman
+theme: next
 exclude_generator:
 
 
@@ -109,3 +109,49 @@ deploy:
   repository: git@github.com:yeungeek/yeungeek.github.com.git
   branch: master
   message: "yeungeek update site"
+
+# =============================================================================
+# NexT Theme configuration
+# =============================================================================
+swiftype_key: syzrqq5Ho6DDncz_gsad
+# 多说帐号
+duoshuo_shortname: yeungeek
+
+# DISQUS 帐号 （如果已经设置 多说 帐号，此选项将被跳过）
+#disqus_shortname: your-disqus-shortname
+
+
+# 社交链接，将在侧栏中显示
+social:
+  GitHub: https://github.com/yeungeek
+  Twitter: https://twitter.com/yeungeek
+  Weibo: http://weibo.com/springyounger
+  #DouBan: your-douban-url
+  ZhiHu: http://www.zhihu.com/people/Yeungeek
+  # 等等
+
+
+# Creative Commons 4.0 International License.
+# http://creativecommons.org/
+# Available: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
+creative_commons: by-nc-sa
+
+
+# Google 站长工具验证，请选择 `HTML Meta` 验证方式
+# See: https://www.google.com/webmasters/
+#google_site_verification: VvyjvVXcJQa0QklHipu6pwm2PJGnnchIqX7s5JbbT_0
+
+
+# Google 分析 ID
+#google_analytics:
+
+
+# 百度统计 ID，此 ID 是百度统计提供脚本中 hm.js? 后面那串字符，非百度统计帐号
+baidu_analytics: 3F75ae37defe17129870bc1ba88b527367
+
+# 站点起始时间
+since: 2014
+
+# =============================================================================
+# End NexT Theme configuration
+# =============================================================================

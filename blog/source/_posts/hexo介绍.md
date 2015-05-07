@@ -4,6 +4,7 @@ tags: [Hexo,github,git]
 ---
 ## 选择 ##
   选择[Hexo](https://github.com/tommy351/hexo "Hexo")也是个巧合，最近在看怎么使用github pages来生成网站，官方推荐[Jekyll](http://jekyllrb.com/)（github 默认pages 引擎），还有兼容Jekyll的[Octopress](http://octopress.org/)。<br>
+  <!-- more -->
 以下为部分静态网站生成器简要列表:<br>
 **1. Ruby**<br>
 Jekyll （github 默认pages 引擎）<br>
@@ -62,7 +63,7 @@ link: http://www.google.com/
 **写作** <br/>
 1.创建
 {% codeblock lang:linux %}
-hexo new "New Post" -> source/_posts/new-post.md 
+hexo new "New Post" -> source/_posts/new-post.md
 hexo new page "New Page" -> source/new-page/index.md
 hexo new draft "New Draft" -> source/_drafts/new-draft.md
 hexo new photo "New Gallery"

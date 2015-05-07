@@ -12,7 +12,9 @@ categories:
 直到`gradle`的出现，基于groovy的构建工具，既保持了Maven的优点，又通过使用Groovy定义的DSL，克服了 Maven中使用XML繁冗以及不灵活等缺点。  
 gradle的使用越来越广泛，尤其是在android的构建上，目前android studio就直接支持gradle，为android的开发者提供了便利。  
 不过目前android studio还是beta阶段，使用eclipse的开发者还是相当多，如何让eclipse也支持gradle呢？
-#eclipse生成gradle 
+<!-- more -->
+
+#eclipse生成gradle
 使用eclipse adt工具，可以让当前的工程生成对应的gradle文件。
 ``` java
 1. Update your Eclipse ADT Plugin (you must have version 22.0 or higher).
@@ -30,39 +32,39 @@ buildscript {
         classpath 'com.android.tools.build:gradle:0.12.+'
     }
 }
- 
+
 apply plugin: 'android-library'
- 
+
 repositories {
     mavenCentral()
 }
- 
+
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
 }
- 
+
 android {
     compileSdkVersion 17
     buildToolsVersion "20.0.0"
- 
+
     defaultConfig {
             applicationId "com.jasmine"
             minSdkVersion 9
             targetSdkVersion 17
     }
-     
+
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
         }
-        
+
     }
- 
+
     lintOptions
             {
                 abortOnError false
             }
- 
+
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -73,10 +75,10 @@ android {
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
         }
- 
+
         // Move the tests to tests/java, tests/res, etc...
         instrumentTest.setRoot('tests')
- 
+
         // Move the build types to build-types/<type>
         // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
         // This moves them out of them default location under src/<type>/... which would
@@ -147,5 +149,3 @@ eclipse.project {
 
 # 完整示例
 {% gist /yeungeek/85f81d5e73ff178e0f3a %}
-
-

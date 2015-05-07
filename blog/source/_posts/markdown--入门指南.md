@@ -11,6 +11,7 @@ description:
   Markdown是一种轻量级的「标记语言」，目标是实现「易读易写」。这篇文章主要介绍Markdown语法的简要规则
 ---
 > [Markdown](http://zh.wikipedia.org/wiki/Markdown)是一种轻量级的「标记语言」，目标是实现「易读易写」。我使用改语言，主要的目的还是因为github的缘故。所以了解一些Markdown的一些基本语法，就是非常有必要了。
+<!-- more -->
 
 # 一. Markdown语法的简要规则
 ## 标题
@@ -94,7 +95,7 @@ youtube:
 
 # 二. 相关推荐
 - [Markdown——入门指南| 简书](http://jianshu.io/p/1e402922ee32)
-- [又拍网-图床](http://www.yupoo.com) 
+- [又拍网-图床](http://www.yupoo.com)
 
 在线好用的Markdown工具，为印象笔记而生
 - [马克飞象](http://maxiang.info)

@@ -11,6 +11,8 @@ description:
 ---
 > Android Studio 是谷歌基于IntelliJ IDEA开发的安卓开发工具，有点类似 Eclipse ADT，Android Studio 提供了集成的 Android 开发工具用于开发和调试，基于Gradle的构建支持。快捷键对于我们来说，可以让工作事半功倍。  
 
+<!-- more -->
+
 Eclipse中快捷键与Studio中的差别还是比较大，通过对比两者，让记忆更深刻。  
 参考：[Eclipse快捷键指南](http://baike.baidu.com/view/2287016.htm),
 [Android Studio 快捷键](http://www.eoeandroid.com/forum.php?mod=viewthread&tid=276107)

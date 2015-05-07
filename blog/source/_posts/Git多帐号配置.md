@@ -6,9 +6,11 @@ tags:
 categories:
 - git
 description:
-  
+
 ---
 > 在使用git，gitlab的时候，会在.ssh目录下生成对应rsa文件，那如果是有多个配置，该怎么处理？
+
+<!-- more -->
 
 如何生成ssh密钥，可以参考 [generating-ssh-keys](https://help.github.com/articles/generating-ssh-keys)  
 ##1. 多帐号配置
@@ -66,5 +68,3 @@ yeungeek@yeungeek:~/.ssh$ ssh-add -l
 {% endcode %}
 ssh-add的作用主要将密钥添加到 ssh-agent 的高速缓存中，这样在*当前会话*中就不需要再次输入密码了
 具体的可以参考 [SSH Keys](http://t.cn/zWlX7vR)  
-
-
