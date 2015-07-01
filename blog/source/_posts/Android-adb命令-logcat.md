@@ -11,7 +11,7 @@ categories:
 
 #使用logcat命令
   通过logcat命令来查看日志内容，命令行输入:
-  ``` android
+  ```
   adb logcat
   ```
   通过`-help`查看`logcat`的用法
