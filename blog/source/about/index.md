@@ -5,8 +5,6 @@ date: 2013-05-13 20:34:21
 
 现在是一枚Android攻城师，关注移动互联网.<br>
 
-做过一年半左右的服务端工作，最近一年转战Android.<br>
-
 更多了解：<br>
 - [github](https://github.com/yeungeek) <br>
 - [twitter](https://twitter.com/yeungeek) <br>
@@ -16,3 +14,6 @@ date: 2013-05-13 20:34:21
 - [eoe](http://my.eoe.cn/128392)
 
 ![](http://pic.yupoo.com/yeungeek/CSyolOPx/medish.jpg)
+<div id="hm_t_72513"></div>
+
+<script>document.write(unescape('%3Cdiv id="hm_t_72513"%3E%3C/div%3E%3Cscript charset="utf-8" src="http://crs.baidu.com/t.js?siteId=75ae37defe17129870bc1ba88b527367&planId=72513&async=0&referer=') + encodeURIComponent(document.referrer) + '&title=' + encodeURIComponent(document.title) + '&rnd=' + (+new Date) + unescape('"%3E%3C/script%3E'));</script>
