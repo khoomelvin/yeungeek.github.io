@@ -14,7 +14,7 @@ categories:
 ### ProGuard
 ProGuard是免费的，在Android SDK中已经集成了，要看原始的请参考：http://proguard.sourceforge.net/。  
 使用ProGuard混淆的应用，通过apktool还是可以看到Manifest和res资源，使用dex2jar也可以看到混淆后的源码，虽然大部分代码已经混淆了。还是可以看个大概，而且通过smail的修改，重新进行逆向apk。
-对于一般的应用足够，如果应用中用了很多的开源项目，对业务进行混淆足够了。
+对于一般的应用足够，而对于应用中用了很多开源项目的，在业务层进行混淆也应该足够了。
 
 ### DexGuard
 DexGuard是收费的，是在Proguard基础上，加入了更多的保护措施。使用DexGuard混淆后，生成的apk文件，就无法正常使用apktool反编译了。
