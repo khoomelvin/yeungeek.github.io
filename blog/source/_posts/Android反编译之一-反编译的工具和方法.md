@@ -35,7 +35,7 @@ apktool b test
 ``` java
 dex2jar class.dex
 ```
-在当前目录生成classes.dex.dex2jar.jar，可以是jd-gui来查看源码。  
+在当前目录生成classes.dex.dex2jar.jar，可以在jd-gui中查看源码。  
 
 dex2jar：https://github.com/pxb1988/dex2jar  
 jd-gui下载:http://jd.benow.ca/http://jd.benow.ca/  
@@ -55,3 +55,6 @@ enjarify yourapp.apk -o yourapp.jar
 #### onekey-decompile-apk
 一步到位反编译apk工具
 ![](https://camo.githubusercontent.com/94e56266cf1b311471e05fb77d9bac7d74b8f2a7/68747470733a2f2f7261776769742e636f6d2f75666f6c6f676973742f6f6e656b65792d6465636f6d70696c652d61706b2f6d61737465722f676f6f676c652d636f64652e706e67)
+
+## 参考
+* [android反编译-smali语法](http://blog.isming.me/2015/01/11/android-decompile-tools/)
