@@ -51,6 +51,10 @@ enjarify yourapp.apk -o yourapp.jar
 ```
 跟dex2jar相比，成功率更高，具体的查看：[why-not-dex2jar](https://github.com/google/enjarify#why-not-dex2jar)
 
+#### android-classyshark
+最近谷歌出的一款查看和分享android文件(APK/Zip/Class/Jar)的工具
+![](https://github.com/google/android-classyshark/raw/master/Resources/ClassySharkAnimated.gif)
+
 ### 整合工具
 #### onekey-decompile-apk
 一步到位反编译apk工具
