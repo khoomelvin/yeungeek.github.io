@@ -1,11 +1,11 @@
 menu:
   home: /
-  resources: /awesome-resources
   developer: /android大神
   libraries: /awesome-android-libraries
   archives: /archives
   #categories: /categories
-  #tags: /tags
+  tags: /tags
+  #resources: /awesome-resources
   about: /about
 
 # Place your favicon.ico to /source directory.
