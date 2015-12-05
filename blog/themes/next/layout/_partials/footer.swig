@@ -1,11 +1,11 @@
-<div class="copyright">
+<div class="copyright" >
   {% set current = date(Date.now(), "YYYY") %}
-  &copy; &nbsp; {% if theme.since and theme.since != current %} {{ theme.since }} - {% endif %}
-  {{ current }}
+  &copy; {% if theme.since and theme.since != current %} {{ theme.since }} - {% endif %}
+  <span itemprop="copyrightYear">{{ current }}</span>
   <span class="with-love">
-    <i class="icon-heart"></i>
+    <i class="icon-next-heart fa fa-heart"></i>
   </span>
-  <span class="author">{{ config.author }}</span>
+  <span class="author" itemprop="copyrightHolder">{{ config.author }}</span>
 </div>
 
 <div class="powered-by">
@@ -18,6 +18,5 @@
     NexT{% if theme.scheme %}.{{ theme.scheme }}{% endif %}
   </a>
 </div>
-<!-- cnzz -->
-<script src="http://s14.cnzz.com/stat.php?id=5371516&web_id=5371516&show=pic1" language="JavaScript"></script>
+
 {% block footer %}{% endblock %}

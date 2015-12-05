@@ -2,11 +2,11 @@
 {% import '_macro/post-collapse.swig' as post_template %}
 {% import '_macro/sidebar.swig' as sidebar_template %}
 
-{% block title %} {{ __('title.category') }}: {{ page.category }} // {{ config.title }} {% endblock %}
+{% block title %} {{ __('title.category') }}: {{ page.category }} | {{ config.title }} {% endblock %}
 
 {% block content %}
 
-  <div id="posts" class="posts-collapse">
+  <section id="posts" class="posts-collapse">
     <div class="collection-title">
       <h2 >
         {{ page.category }}
@@ -17,7 +17,7 @@
     {% for post in page.posts %}
       {{ post_template.render(post) }}
     {% endfor %}
-  </div>
+  </section>
 
   {% include '_partials/pagination.swig' %}
 
