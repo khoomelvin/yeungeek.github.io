@@ -5,7 +5,7 @@ tags:
 - annotation
 - ButterKnife
 categories:
-- android
+- publicTech
 ---
 
 基础是学习任何技术的必须，接下来会介绍一些Android上用到的一些公共技术点。
