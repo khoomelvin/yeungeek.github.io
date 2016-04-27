@@ -104,7 +104,7 @@ apt：Annotation Processing Tool，官方说明
 1. 自定义类集成自 AbstractProcessor
 2. 重写其中的 process 函数
 
-上文定义的MyAnnotation，使用apt，该如何进行解析：(在android studio中直接使用AbstractProcessor，会找不到这个类，具体的解决方法，请看知识点-apt使用)
+上文定义的MyAnnotation，使用apt，该如何进行解析：(在android studio中直接使用AbstractProcessor，会找不到这个类，具体的解决方法，请看知识点[Annotation Processing Tool](/2016/04/27/Android公共技术点之二-Annotation-Processing-Tool/))
 ```
 @SupportedAnnotationTypes({ "MyAnnotation" })
 public class MyAnnotationProcessor extends AbstractProcessor {
