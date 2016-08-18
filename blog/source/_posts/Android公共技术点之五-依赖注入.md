@@ -60,7 +60,7 @@ public class Human {
 上面代码中使用`@Inject`注解进行标记，实现`Father`对象的依赖注入。  
 注解有编译时和运行时注解，在Android上比较流行的[RoboGuice](https://github.com/roboguice/roboguice)是运行时注解，[Dagger2](http://google.github.io/dagger/)则是基于编译时注解。
 如果对Dagger的源码感兴趣，可以参考[Dagger 实现原理解析](http://a.codekk.com/detail/Android/%E6%89%94%E7%89%A9%E7%BA%BF/Dagger%20%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90)
-<!--more-->
+
 ## 参考
 * [公共技术点之依赖注入](http://codekk.com/blogs/detail/54cfab086c4761e5001b253c)
 * [Dependency Injection, Annotations, and why Java is Better Than you Think it is](http://www.objc.io/issue-11/dependency-injection-in-java.html)
