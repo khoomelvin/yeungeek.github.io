@@ -31,7 +31,7 @@ menu:
   home: /
   #categories: /categories
   developer: /android大神
-  libraries: /awesome-android-libraries
+  androidweekly: /android-weekly-topic
   archives: /archives
   tags: /tags
   commonweal: /404.html
@@ -53,7 +53,7 @@ menu_icons:
   archives: archive
   commonweal: heartbeat
   developer: android
-  libraries: child
+  androidweekly: child
 
 
 
@@ -187,7 +187,7 @@ sidebar:
 links_title: Links
 #links_layout: block
 #links_layout: inline
-links: 
+links:
   干货集中营: http://gank.io/
   稀土掘金: http://gold.xitu.io/
 
@@ -351,6 +351,10 @@ use_motion: true
 # Fancybox
 fancybox: true
 
+# Donate
+reward_comment: 曾经有一份打赏放在我面前,我没有珍惜.如果上天给我再来一次的机会，我会说三个字:赏死我.
+wechatpay: /images/wexin.jpg
+alipay: /images/alipay.png
 
 # Script Vendors.
 # Set a CDN address for the vendor you want to customize.
