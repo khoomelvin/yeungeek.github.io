@@ -7,7 +7,7 @@ categories:
 - source analysis
 ---
 年前在掘金上看到一篇文章[支付宝 Android 版使用的开源组件](http://www.jianshu.com/p/844e338319af),看到很多人在评论，怎么支付宝也用这么多的开源框架，是不是会很low啊?  
-接下来，我们看看支付宝用到的开源框架列表：https://ds.alipay.com/fd-opensource/index.html。  这篇文章已经分析了支付宝用到的开源组件以及一些说明。不过我这次要从源码角度(反编译)再去看看，支付宝到底用了哪些开源框架。
+接下来，我们看看支付宝用到的开源框架列表：https://ds.alipay.com/fd-opensource/index.html 。  这篇文章已经分析了支付宝用到的开源组件以及一些说明。不过我这次要从源码角度(反编译)再去看看，支付宝到底用了哪些开源框架。
 <!-- more -->
 ## 反编译源码
 关于反编译的工具，可以看我以前的一篇文章[Android反编译之一-反编译的工具和方法](http://yeungeek.com/2015/08/22/Android%E5%8F%8D%E7%BC%96%E8%AF%91%E4%B9%8B%E4%B8%80-%E5%8F%8D%E7%BC%96%E8%AF%91%E7%9A%84%E5%B7%A5%E5%85%B7%E5%92%8C%E6%96%B9%E6%B3%95/)。
