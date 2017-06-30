@@ -7,10 +7,10 @@ categories:
 - source analysis
 ---
 距离上一篇的分析文章，已经过去一段时间了。  
-这次我们分析的是手淘app使用了哪些开源框架，在手淘app的关于中，它也有和支付宝一样，也有开源列表声明：https://h5.m.taobao.com/other/android_legal.html，  其中罗列一些手淘app使用的开源框架。这篇文章从源码角度去分析，手淘具体使用了哪些框架。
+这次我们分析的是手淘app使用了哪些开源框架，在手淘app的关于中，和支付宝一样，也有开源列表声明：https://h5.m.taobao.com/other/android_legal.html，  其中罗列一些手淘app使用的开源框架。这篇文章从源码角度去分析，手淘具体使用了哪些框架。
 <!-- more -->
 ## 反编译源码
-这次使用的反编译工具是[jadx](https://github.com/skylot/jadx)，使用非常方便,命令行或者gui直接打开对应的apk就可以查看源码和清单文件。
+这次使用的反编译工具是[jadx](https://github.com/skylot/jadx)，使用非常方便,命令行或者gui直接打开对应的apk就可以查看源码和清单文件。 
 代码结构：
 ![](http://pic.yupoo.com/yeungeek/GyAjHinB/medish.jpg)
 ## 源码分析
@@ -25,7 +25,7 @@ anetwork|anetwork.network|网络相关,没有找到对应资源
 [NineOldAndroids](https://github.com/JakeWharton/NineOldAndroids)|com.nineoldandroids.view|动画兼容库
 [weex](https://github.com/apache/incubator-weex)|com.taobao.weex|跨平台开发框架
 
-关于其他使用到第三方push库，这里就没有列出来，有兴趣的同学，可以自行研究。
+其中淘宝封装的库没有找到对应的资源，还有其他第三方分析和push库，这里也没有列出来，有兴趣的同学，可以自行研究。
 淘宝使用weex后，一些UI库，很多已经被weex替代。
 
 ### 惊喜库
@@ -33,8 +33,8 @@ anetwork|anetwork.network|网络相关,没有找到对应资源
 * [Lottie动画库](https://github.com/airbnb/lottie-android)
 * [跨平台开发框架 weex](https://github.com/apache/incubator-weex)
 
-我们从源码中可以看出，淘宝对跨平台和组件化的框架运用的非常多，手淘的一些就可以非常的动态，可以根据不同的时间，动态更新各个组件，达到预期的效果。
-后面分析的话，可以看下电商同类型的，京东app。
+我们从源码中可以看出，淘宝对跨平台和组件化的框架运用的非常多，手淘的一些功能模块就变得非常动态，可以根据不同的节日、时间，动态更新地更新对应组件，达到预期的效果。
+后面要分析的话，准备看下电商同类型的，京东app、美团等
 
 
 
