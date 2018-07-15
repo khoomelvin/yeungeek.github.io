@@ -14,7 +14,7 @@ keywords: "Hexo, Yeungeek"
 rss:
 
 # Specify the date when the site was setup
-#since: 2015
+since: 2015
 
 # icon between year and author @Footer
 authoricon: heart
@@ -500,8 +500,8 @@ three_waves: false
 canvas_ribbon: false
 
 # Donate
-reward_comment: 曾经有一份打赏放在我面前,我没有珍惜.如果上天给我再来一次的机会，我会说三个字:赏死我.
-wechatpay: /images/wexin.jpg
+reward_comment: 曾经有一份打赏放在我面前,我没有珍惜.如果上天给我再来一次的机会，我会说:来着不拒.
+wechatpay: /images/wexin.png
 alipay: /images/alipay.png
 
 # Script Vendors.
