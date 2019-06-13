@@ -19,4 +19,15 @@ after_script:
   - git config user.email "yangjian0410@gmail.com"
   - git add .
   - git commit -m "TravisCI"
+  # Github Pages
+  - git push --force --quiet "https://${CI_TOKEN}@${GH_REF}" master:master 
+
+branches:
+  only:
+  - develop
+
+env:
+ global:
+   # Github Pages
+   - GH_REF: github.com/yeungeek/yeungeek.github.io
 
