@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+- "stable"
+cache:
+  directories:
+  - node_modules
+before_install:
+- cd blog
+- npm install hexo-cli -g
+install:
+- npm install
+script:
+- hexo clean
+- hexo generate
+after_script:
+  - cd ./public
+  - git init
+  - git config user.name "yeungeek"
+  - git config user.email "yangjian0410@gmail.com"
+  - git add .
+  - git commit -m "TravisCI"
+
