@@ -4,7 +4,7 @@ date: 2019-06-14 22:58:01
 tags: 
    - Network
 categories:
-   - Network
+   - Android应用层
 ---
 从本篇开始，真正进入我们的Android网络编程学习之旅。
 

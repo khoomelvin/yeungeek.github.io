@@ -8,7 +8,7 @@ tags:
    - OKHttp
    - Retrofit
 categories:
-   - Network
+   - Android应用层
 top: true
 ---
 
@@ -21,7 +21,7 @@ top: true
 
 # 系列文章目录
 * [01.Android网络编程-计算机网络基础](/2019/06/14/Network-Basic/)
-* 02.Android网络编程-TCP/IP
+* [02.Android网络编程-TCP/IP](/2019/06/21/Network-TCP-IP/)
 * 03.Android网络编程-HTTP/HTTPS
 * 04.Android网络编程-Socket
 * 05.Android网络编程-Cookie，Session，Token
@@ -32,3 +32,4 @@ top: true
 * [Android网络编程：基础理论汇总](https://juejin.im/post/5a2614b8f265da432652af7d)
 * [计算机网络](https://github.com/CyC2018/CS-Notes/blob/master/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%20-%20%E7%9B%AE%E5%BD%95.md)
 * [面试带你飞：这是一份全面的 计算机网络基础 总结攻略](https://juejin.im/post/5ad7e6c35188252ebd06acfa)
+* [Android网络编程系列](http://liuwangshu.cn/tags/Android%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/)
