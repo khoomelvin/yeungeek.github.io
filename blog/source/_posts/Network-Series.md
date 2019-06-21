@@ -20,7 +20,7 @@ top: true
 >                                            ---- 极客时间《趣谈网络协议》刘超
 
 # 系列文章目录
-* [01.Android网络编程-计算机网络基础](/2019/06/13/Network-Basic/)
+* [01.Android网络编程-计算机网络基础](/2019/06/14/Network-Basic/)
 * 02.Android网络编程-TCP/IP
 * 03.Android网络编程-HTTP/HTTPS
 * 04.Android网络编程-Socket

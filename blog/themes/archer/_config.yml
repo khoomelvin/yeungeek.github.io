@@ -45,10 +45,12 @@ SEO_keywords:
   - hexo
   - 'hexo-theme'
   - 'hexo-blog'
+  - 'Android'
+  - 'yeungeek'
 # main title shown in header image
-main_title: Android Develper
+main_title: Android 沉思录
 # subtitle
-subtitle: Android Basic && Framework && Interview
+subtitle: (Java) -- [Android] -- [Performance] -- [Interview]
 # site haeder image
 site_header_image: '/intro/index-bg.jpg'
 # post haeder image
