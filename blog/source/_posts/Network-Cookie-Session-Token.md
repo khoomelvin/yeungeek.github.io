@@ -17,7 +17,7 @@ Cookie由服务端生成，发送给客户端(Set-Cookie)，客户端请求的�
 请求流程： 
 ![请求流程](https://s2.ax1x.com/2019/07/16/ZH7XAf.png)
 Cookie字段：名字、值、过期时间、路径和域。路径与域一起构成Cookie的作用范围。  
-通过Chrome的开发者工具中看到，昨天在github.com上保存在客户端的Cookie信息。  
+通过Chrome的开发者工具中看到，在github.com上保存在客户端的Cookie信息。  
 ![ZqcVOS.png](https://s2.ax1x.com/2019/07/17/ZqcVOS.png)
 * Name：名字
 * Value：值
@@ -27,7 +27,7 @@ Cookie字段：名字、值、过期时间、路径和域。路径与域一起�
 
 上图中`logged_in`和`user_session`两个Cookie值表示登录github.com后保存下来的登录状态和Session。
 # Session 
-Session是在服务端实现，当前客户端请求服务端时，服务端会检查请求中是否包含Session标识(Session id)，
+Session是在服务端实现，当客户端请求服务端时，服务端会检查请求中是否包含Session标识(Session id)，
 * 如果没有,那么服务端就生成一个随机的Session以及和它匹配的Session id,并将Session id返回给客户端。
 * 如果有,那么服务器就在存储中根据Session id 查找到对应的Session。
 
