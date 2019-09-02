@@ -10,7 +10,8 @@ categories:
    - Android应用层
 ---
 HTTP协议是Hyper Text Transfer Protocol（超文本传输协议）的缩写,在TCP/IP体系中属于最高层(应用层)是用于从万维网服务器传输超文本到本地浏览器的传送协议。   
-HTTP协议工作于客户端-服务端架构为上。浏览器作为HTTP客户端通过URL向HTTP服务端即WEB服务器发送所有请求。Web服务器根据接收到的请求后，向客户端发送响应信息。<!--more--> 这是最基本的HTTP工作原理，如图所示:
+HTTP协议工作于客户端-服务端架构为上。浏览器作为HTTP客户端通过URL向HTTP服务端即WEB服务器发送所有请求。Web服务器根据接收到的请求后，向客户端发送响应信息。<!--more--> 
+这是最基本的HTTP工作原理，如图所示:
 ![C/S架构](https://s2.ax1x.com/2019/07/12/ZfgnTU.jpg)
 
 # HTTP报文
