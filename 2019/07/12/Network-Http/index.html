@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Yeungeek">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Yeungeek">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog,Android,yeungeek">
+    
+    <meta name="description" content="It's my Androad">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Android网络编程-HTTP/HTTPS · Android 沉思录</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?75ae37defe17129870bc1ba88b527367";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    
+    <!-- 谷歌统计  -->
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-37469819-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">Android 沉思录</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Android网络编程-HTTP/HTTPS</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href="/">Android 沉思录</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:40vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Android网络编程-HTTP/HTTPS
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Network">Network</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Android">Android</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Http">Http</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Https">Https</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">2.5k</span>阅读时长: <span class="post-count reading-time">9 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/07/12</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>HTTP协议是Hyper Text Transfer Protocol（超文本传输协议）的缩写,在TCP/IP体系中属于最高层(应用层)是用于从万维网服务器传输超文本到本地浏览器的传送协议。<br>HTTP协议工作于客户端-服务端架构为上。浏览器作为HTTP客户端通过URL向HTTP服务端即WEB服务器发送所有请求。Web服务器根据接收到的请求后，向客户端发送响应信息。<a id="more"></a><br>这是最基本的HTTP工作原理，如图所示:<br><img src="https://s2.ax1x.com/2019/07/12/ZfgnTU.jpg" alt="C/S架构"></p>
+<h1 id="HTTP报文"><a href="#HTTP报文" class="headerlink" title="HTTP报文"></a>HTTP报文</h1><p>HTTP属于应用层，应用层传输的数据单位是报文。<br>HTTP报文分为请求报文和响应报文。  </p>
+<h2 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a>请求报文</h2><p><img src="https://s2.ax1x.com/2019/07/13/Zhv4AO.jpg" alt="请求报文"><br>HTTP请求报文由以下4个部分组成:</p>
+<ul>
+<li>请求行：请求类型,要访问的资源以及所使用的HTTP版本。</li>
+<li>请求头部：服务器要使用的附加信息。</li>
+<li>空行：请求头部后面的空行是必须的</li>
+<li>请求包体：可以添加任意的其他数据</li>
+</ul>
+<h3 id="请求行"><a href="#请求行" class="headerlink" title="请求行"></a>请求行</h3><p>请求行组成：请求方法，请求URL，协议版本。</p>
+<h4 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">作用</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">GET</td>
+<td align="left">获取资源</td>
+<td align="left">用来请求访问已被URI标识的</td>
+</tr>
+<tr>
+<td align="left">POST</td>
+<td align="left">传输实体主体</td>
+<td align="left">POST主要用来传输数据，而GET主要用来获取资源</td>
+</tr>
+<tr>
+<td align="left">HEAD</td>
+<td align="left">获取报文首部</td>
+<td align="left">和GET方法类似，但是不返回报文实体主体部分</td>
+</tr>
+<tr>
+<td align="left">PUT</td>
+<td align="left">上传文件</td>
+<td align="left">用来传输文件，由于自身不带验证机制，任何人都可以上传文件</td>
+</tr>
+<tr>
+<td align="left">DELETE</td>
+<td align="left">删除文件</td>
+<td align="left">与PUT功能相反，并且同样不带验证机制</td>
+</tr>
+<tr>
+<td align="left">OPTIONS</td>
+<td align="left">查询支持的方法</td>
+<td align="left">用来查询针对请求URI请求的资源支持的方法</td>
+</tr>
+<tr>
+<td align="left">TRACE</td>
+<td align="left">追踪路径</td>
+<td align="left">服务器会将通信路径返回给客户端</td>
+</tr>
+<tr>
+<td align="left">CONNECT</td>
+<td align="left">要求用隧道协议连接代理</td>
+<td align="left">使用 SSL（Secure Sockets Layer，安全套接层）和TLS（Transport Layer Security，传输层安全）协议把通信内容加密后经网络隧道传输</td>
+</tr>
+</tbody></table>
+<h4 id="请求URL"><a href="#请求URL" class="headerlink" title="请求URL"></a>请求URL</h4><p>URL(Uniform Resource Locator)统一资源定位符，表示资源的地点(互联网上的地址)。<br>URI(Uniform Resource Identifier)统一资源标识符，用字符串标识某一互联网资源，URL是URI的子集。  </p>
+<h4 id="协议版本"><a href="#协议版本" class="headerlink" title="协议版本"></a>协议版本</h4><ul>
+<li>HTTP/1.0：HTTP协议的第二个版本，第一个在通讯中指定版本号的HTTP协议版本，至今仍被广泛采用</li>
+<li>HTTP/1.1：HTTP协议的第三个版本是HTTP 1.1，是目前使用最广泛的协议版本</li>
+<li>HTTP/2.0：HTTP 2.0是下一代HTTP协议，目前应用还非常少</li>
+</ul>
+<h3 id="请求头部"><a href="#请求头部" class="headerlink" title="请求头部"></a>请求头部</h3><p>请求头部由关键字/值对组成，每行一对，关键字和值用英文冒号“:”分隔。<br>有4种类型的首部字段：通用首部字段、请求首部字段、响应首部字段和实体首部字段，<a href="https://cyc2018.github.io/CS-Notes/#/notes/HTTP?id=%e5%9b%9b%e3%80%81http-%e9%a6%96%e9%83%a8" target="_blank" rel="noopener">所有完整首部</a><br>这里我们先了解下常用的请求首部。   </p>
+<table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Accept</td>
+<td align="left">用户代理可处理的媒体类型</td>
+</tr>
+<tr>
+<td align="left">Accept-Encoding</td>
+<td align="left">优先的内容编码<br>Accept-Encoding: gzip, deflate, br</td>
+</tr>
+<tr>
+<td align="left">Authorization</td>
+<td align="left">Web 认证信息</td>
+</tr>
+<tr>
+<td align="left">Cache-Control</td>
+<td align="left">控制缓存的行为</td>
+</tr>
+<tr>
+<td align="left">Connection</td>
+<td align="left">控制不再转发给代理的首部字段、管理持久连接</td>
+</tr>
+<tr>
+<td align="left">Content-Encoding</td>
+<td align="left">实体主体适用的编码方式</td>
+</tr>
+<tr>
+<td align="left">Content-Type</td>
+<td align="left">实体主体的媒体类型</td>
+</tr>
+<tr>
+<td align="left">Content-Length</td>
+<td align="left">实体主体的大小</td>
+</tr>
+<tr>
+<td align="left">Host</td>
+<td align="left">请求资源所在服务器</td>
+</tr>
+<tr>
+<td align="left">If-Modified-Since</td>
+<td align="left">服务器上次返回的<code>Last-Modified</code>日期，如果在这个日期之后，<br>请求的资源都没有更新过，则返回304 Not Modified响应</td>
+</tr>
+<tr>
+<td align="left">If-None-Match</td>
+<td align="left">比较实体标记，值为上一次返回的ETag，<br>一般会和<code>If-Modified-Since</code>一起返回</td>
+</tr>
+<tr>
+<td align="left">Referer</td>
+<td align="left">对请求中URI的原始获取方</td>
+</tr>
+<tr>
+<td align="left">User-Agent</td>
+<td align="left">HTTP 客户端程序的信息</td>
+</tr>
+<tr>
+<td align="left">Cookie</td>
+<td align="left">保存状态信息</td>
+</tr>
+<tr>
+<td align="left">Transfer-Encoding</td>
+<td align="left">指定报文主体的传输编码方式</td>
+</tr>
+</tbody></table>
+<h3 id="请求包体"><a href="#请求包体" class="headerlink" title="请求包体"></a>请求包体</h3><p>请求包体不在 GET 方法中使用，而是在POST 方法中使用。<br>HTTP请求的请求体有三种不同的形式：</p>
+<ul>
+<li>任意类型：服务器不会解析请求体，请求体的处理需要自己解析，比如JSON</li>
+<li>键值对(application/x-www-form-urlencoded)：最常见的 POST 提交数据的方式，表单模式</li>
+<li>文件分割：请求体被分成为多个部分，文件上传时会被使用</li>
+</ul>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>使用抓包工具或者Chrome来查看</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">POST /getconfig HTTP/<span class="number">1.1</span></span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">User-Agent: Dalvik/<span class="number">2.1</span>.0 (Linux; U; Android <span class="number">9</span>; Redmi Note <span class="number">7</span> MIUI/V10.3.2.0.PFGCNXM)</span><br><span class="line">Host: data.mistat.xiaomi.com</span><br><span class="line">Accept-Encoding: gzip</span><br><span class="line">Content-Length: <span class="number">205</span></span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line">app_id=<span class="number">1000274</span>&amp;app_version=<span class="number">10.8</span>.3</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>请求行：显示Post请求，协议版本为HTTP/1.1</li>
+<li>请求头部：<code>Content-Type</code>,<code>User-Agent</code>,<code>Host</code>,<code>Accept-Encoding</code>,<code>Content-Length</code>,<code>Connection</code></li>
+<li>请求体：Content-Type声明为键值对</li>
+</ul>
+<h2 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h2><p><img src="https://s2.ax1x.com/2019/07/13/Zhv5ND.jpg" alt="响应报文"><br>HTTP 响应报文由状态行、响应头部、空行和响应包体4个部分组成。</p>
+<h3 id="状态行"><a href="#状态行" class="headerlink" title="状态行"></a>状态行</h3><p>状态行由HTTP协议版本字段、状态码和状态码的描述文本 3 个部分组成，他们之间使用空格隔开;<br>协议版本和请求中的对应，状态码和描述会一一对应。</p>
+<h4 id="状态码、描述"><a href="#状态码、描述" class="headerlink" title="状态码、描述"></a>状态码、描述</h4><p>状态码由三位数字组成，第一位数字表示响应的类型，常用的状态码有五大类：</p>
+<ul>
+<li>1xx：Informational（信息性状态码），接收的请求正在处理;</li>
+<li>2xx：Success（成功状态码），请求正常处理完毕;</li>
+<li>3xx：Redirection（重定向状态码），需要进行附加操作以完成请求;</li>
+<li>4xx：Client Error（客户端错误状态码），服务器无法处理请求;</li>
+<li>5xx：Server Error（服务器错误状态码），服务器处理请求出错;</li>
+</ul>
+<p>常用的一些状态码和描述</p>
+<h5 id="1xx"><a href="#1xx" class="headerlink" title="1xx"></a>1xx</h5><table>
+<thead>
+<tr>
+<th align="left">状态码、描述</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">100 Continue</td>
+<td align="left">表明到目前为止都很正常，客户端可以继续发送请求或者忽略这个响应</td>
+</tr>
+</tbody></table>
+<h5 id="2xx"><a href="#2xx" class="headerlink" title="2xx"></a>2xx</h5><table>
+<thead>
+<tr>
+<th align="left">状态码、描述</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">200 OK</td>
+<td align="left">请求成功</td>
+</tr>
+<tr>
+<td align="left">204 No Content</td>
+<td align="left">请求已经成功处理，但是返回的响应报文不包含实体的主体部分</td>
+</tr>
+<tr>
+<td align="left">206 Partial Content</td>
+<td align="left">表示客户端进行了范围请求，<br>响应报文包含由Content-Range指定范围的实体内容</td>
+</tr>
+</tbody></table>
+<h5 id="3xx"><a href="#3xx" class="headerlink" title="3xx"></a>3xx</h5><table>
+<thead>
+<tr>
+<th align="left">状态码、描述</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">301 Moved Permanently</td>
+<td align="left">永久性重定向</td>
+</tr>
+<tr>
+<td align="left">302 Found</td>
+<td align="left">临时性重定向</td>
+</tr>
+<tr>
+<td align="left">304 Not Modified</td>
+<td align="left">如果请求报文首部包含一些条件，If-Match，If-Range, <br>If-Modified-Since，If-None-Match，，If-Unmodified-Since。<br>如果不满足条件，则服务器会返回 304 状态码</td>
+</tr>
+<tr>
+<td align="left">307 Temporary Redirect</td>
+<td align="left">临时重定向，与 302 的含义类似，<br>但是307要求浏览器不会把重定向请求的POST方法改成GET方法</td>
+</tr>
+</tbody></table>
+<h5 id="4xx"><a href="#4xx" class="headerlink" title="4xx"></a>4xx</h5><table>
+<thead>
+<tr>
+<th align="left">状态码、描述</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">400 Bad Request</td>
+<td align="left">请求报文中存在语法错误</td>
+</tr>
+<tr>
+<td align="left">401 Unauthorized</td>
+<td align="left">请求需要验证用户</td>
+</tr>
+<tr>
+<td align="left">403 Forbidden</td>
+<td align="left">访问权限问题</td>
+</tr>
+<tr>
+<td align="left">404 Not Found</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h5 id="5xx"><a href="#5xx" class="headerlink" title="5xx"></a>5xx</h5><table>
+<thead>
+<tr>
+<th align="left">状态码、描述</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">500 Internal Server Error</td>
+<td align="left">服务器正在执行请求时发生错误</td>
+</tr>
+<tr>
+<td align="left">503 Service Unavailable</td>
+<td align="left">服务器正在执行请求时发生错误</td>
+</tr>
+</tbody></table>
+<h3 id="响应头部"><a href="#响应头部" class="headerlink" title="响应头部"></a>响应头部</h3><p>和请求头部一样，由关键字/值对组成，每行一对，关键字和值用英文冒号“:”分隔。<br>常用的请求首部  </p>
+<table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Cache-Control</td>
+<td align="left">控制缓存的行为</td>
+</tr>
+<tr>
+<td align="left">Connection</td>
+<td align="left">控制不再转发给代理的首部字段、管理持久连接</td>
+</tr>
+<tr>
+<td align="left">Transfer-Encoding</td>
+<td align="left">指定报文主体的传输编码方式</td>
+</tr>
+<tr>
+<td align="left">Content-Encoding</td>
+<td align="left">实体主体适用的编码方式</td>
+</tr>
+<tr>
+<td align="left">Content-Type</td>
+<td align="left">实体主体的媒体类型</td>
+</tr>
+<tr>
+<td align="left">Content-Length</td>
+<td align="left">实体主体的大小</td>
+</tr>
+<tr>
+<td align="left">Expires</td>
+<td align="left">实体主体过期的日期时间</td>
+</tr>
+<tr>
+<td align="left">ETag</td>
+<td align="left">资源的匹配信息，和<code>If-Nome-Match</code>对应</td>
+</tr>
+<tr>
+<td align="left">Date</td>
+<td align="left">服务端</td>
+</tr>
+<tr>
+<td align="left">Location</td>
+<td align="left">令客户端重定向至指定 URI</td>
+</tr>
+<tr>
+<td align="left">Server</td>
+<td align="left">HTTP 服务器的安装信息</td>
+</tr>
+<tr>
+<td align="left">Last-Modified</td>
+<td align="left">资源的最后修改日期时间</td>
+</tr>
+<tr>
+<td align="left">Set-Cookie</td>
+<td align="left">设置Cookie，客户端得到响应报文后把 Cookie 内容保存到浏览器中</td>
+</tr>
+</tbody></table>
+<p>其他更详细的首部信息，可以参考<a href="https://cyc2018.github.io/CS-Notes/#/notes/HTTP?id=%e5%9b%9b%e3%80%81http-%e9%a6%96%e9%83%a8" target="_blank" rel="noopener">这里</a>   </p>
+<h3 id="响应包体"><a href="#响应包体" class="headerlink" title="响应包体"></a>响应包体</h3><p>服务器返回给客户端的文本信息。<br>和请求包体的分类一样。</p>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK</span><br><span class="line">Date: Sat, <span class="number">13</span> Jul <span class="number">2019</span> <span class="number">08</span>:<span class="number">40</span>:<span class="number">52</span> GMT</span><br><span class="line">Content-Type: application/json;charset=UTF-<span class="number">8</span></span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Content-Encoding: gzip</span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line">&#123;<span class="string">"errorCode"</span>:-<span class="number">2</span>,<span class="string">"reason"</span>:<span class="string">"no changing"</span>,<span class="string">"result"</span>:<span class="keyword">null</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>响应行：返回响应码200 Ok，表示服务端返回数据成功</li>
+<li>响应头部：Content-Type设置返回的类型为JSON格式</li>
+<li>响应包体：返回具体JSON数据</li>
+</ul>
+<h1 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h1><p>HTTP 有以下安全性问题：</p>
+<ul>
+<li>使用明文进行通信，内容可能会被窃听；</li>
+<li>不验证通信方的身份，通信方的身份有可能遭遇伪装；</li>
+<li>无法证明报文的完整性，报文有可能遭篡改。</li>
+</ul>
+<p>HTTPS 并不是新协议，而是让 HTTP 先和 SSL（Secure Sockets Layer）通信，再由 SSL 和 TCP 通信，也就是说 HTTPS 使用了隧道进行通信。<br>通过使用 SSL，HTTPS 具有了加密（防窃听）、认证（防伪装）和完整性保护（防篡改）<br><img src="https://s2.ax1x.com/2019/07/13/Z42xPO.jpg" alt="HTTPS"></p>
+<h2 id="与HTTP区别"><a href="#与HTTP区别" class="headerlink" title="与HTTP区别"></a>与HTTP区别</h2><table>
+<thead>
+<tr>
+<th align="left">协议</th>
+<th align="left">原理</th>
+<th align="left">数据格式</th>
+<th align="left">传输速度</th>
+<th align="left">端口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">HTTP</td>
+<td align="left">应用层</td>
+<td align="left">明文传输</td>
+<td align="left">三次握手，传输三个包</td>
+<td align="left">80</td>
+</tr>
+<tr>
+<td align="left">HTTPS</td>
+<td align="left">传输层</td>
+<td align="left">SSL加密</td>
+<td align="left">三次握手基础上增加ssl握手(9个包)，<br>传输12个包</td>
+<td align="left">443</td>
+</tr>
+</tbody></table>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li>因为需要进行加密解密等过程，因此速度会更慢；</li>
+<li>需要支付证书授权的高额费用。</li>
+</ul>
+<h1 id="HTTP框架"><a href="#HTTP框架" class="headerlink" title="HTTP框架"></a>HTTP框架</h1><h2 id="Volley"><a href="#Volley" class="headerlink" title="Volley"></a><a href="https://github.com/google/volley" target="_blank" rel="noopener">Volley</a></h2><p>Volley是Google 官方出的一套小而巧的异步请求库，该框架封装的扩展性很强，支持 HttpClient、HttpUrlConnection，甚至支持OKHttp。</p>
+<h2 id="OKHttp"><a href="#OKHttp" class="headerlink" title="OKHttp"></a><a href="https://github.com/square/okhttp/" target="_blank" rel="noopener">OKHttp</a></h2><p>OKHttp是Square 公司开源的针对 Java 和 Android 程序，封装的一个高性能 http 请求库，所以它的职责跟 HttpUrlConnection 是一样的，支持 spdy、http 2.0、websocket ，支持同步、异步。<br>已被谷歌加入到Android的源码中。</p>
+<h2 id="Retrofit"><a href="#Retrofit" class="headerlink" title="Retrofit"></a><a href="https://github.com/square/retrofit" target="_blank" rel="noopener">Retrofit</a></h2><p>Retrofit是Square公司出品的默认基于OKHttp 封装的一套 RESTful 网络请求框架</p>
+<p>后续文章会从OKHttp、Retrofit角度来分析Http。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://cyc2018.github.io/CS-Notes/#/notes/HTTP" target="_blank" rel="noopener">Http</a></li>
+<li><a href="https://juejin.im/post/5c98306bf265da60ed6eedbc" target="_blank" rel="noopener">这是一份全面&amp; 详细 HTTP协议 学习攻略</a></li>
+<li><a href="https://juejin.im/post/5b32f82a518825749e4a218b" target="_blank" rel="noopener">精读《图解HTTP》</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2016/08/http.html" target="_blank" rel="noopener">HTTP 协议入门</a></li>
+</ul>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://yeungeek.github.io">Yeungeek</a>
+            </p><p>原文链接：<a href="http://yeungeek.github.io/2019/07/12/Network-Http/">http://yeungeek.github.io/2019/07/12/Network-Http/</a>
+            </p><p>发表日期：<a href="http://yeungeek.github.io/2019/07/12/Network-Http/">July 12th 2019, 10:09:56 am</a>
+            </p><p>更新日期：<a href="http://yeungeek.github.io/2019/07/12/Network-Http/">January 17th 2020, 3:44:17 am</a>
+            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2019/07/15/Network-Cookie-Session-Token/" title="Android网络编程-Cookie，Session，Token">
+                    <div class="nextTitle">Android网络编程-Cookie，Session，Token</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2019/06/26/Network-Socket/" title="Android网络编程-Socket">
+                    <div class="prevTitle">Android网络编程-Socket</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8yODIyNi80Nzk4">
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:yeungeek@gmail.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/yeungeek" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title="wechat">
+                  
+                  <img class="profile-qr" src="/assets/wechat_qr.jpeg">
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//weibo.com/springyounger" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//twitter.com/yeungeek" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
+            
+        
+    
+        
+    
+        
+            
+                <a href="//stackoverflow.com/users/943667/yeungeek" class="iconfont-archer stack-overflow" target="_blank" title="stack-overflow"></a>
+            
+        
+    
+        
+            
+                <a href="//segmentfault.com/u/yeungeek" class="iconfont-archer segmentFault" target="_blank" title="segmentFault"></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:40vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP报文"><span class="toc-number">1.</span> <span class="toc-text">HTTP报文</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#请求报文"><span class="toc-number">1.1.</span> <span class="toc-text">请求报文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#请求行"><span class="toc-number">1.1.1.</span> <span class="toc-text">请求行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#请求方法"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#请求URL"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">请求URL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#协议版本"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">协议版本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#请求头部"><span class="toc-number">1.1.2.</span> <span class="toc-text">请求头部</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#请求包体"><span class="toc-number">1.1.3.</span> <span class="toc-text">请求包体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例"><span class="toc-number">1.1.4.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#响应报文"><span class="toc-number">1.2.</span> <span class="toc-text">响应报文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#状态行"><span class="toc-number">1.2.1.</span> <span class="toc-text">状态行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#状态码、描述"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">状态码、描述</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1xx"><span class="toc-number">1.2.1.1.1.</span> <span class="toc-text">1xx</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2xx"><span class="toc-number">1.2.1.1.2.</span> <span class="toc-text">2xx</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3xx"><span class="toc-number">1.2.1.1.3.</span> <span class="toc-text">3xx</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4xx"><span class="toc-number">1.2.1.1.4.</span> <span class="toc-text">4xx</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5xx"><span class="toc-number">1.2.1.1.5.</span> <span class="toc-text">5xx</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#响应头部"><span class="toc-number">1.2.2.</span> <span class="toc-text">响应头部</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#响应包体"><span class="toc-number">1.2.3.</span> <span class="toc-text">响应包体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例-1"><span class="toc-number">1.2.4.</span> <span class="toc-text">示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTPS"><span class="toc-number">2.</span> <span class="toc-text">HTTPS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#与HTTP区别"><span class="toc-number">2.1.</span> <span class="toc-text">与HTTP区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缺点"><span class="toc-number">2.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP框架"><span class="toc-number">3.</span> <span class="toc-text">HTTP框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Volley"><span class="toc-number">3.1.</span> <span class="toc-text">Volley</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OKHttp"><span class="toc-number">3.2.</span> <span class="toc-text">OKHttp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Retrofit"><span class="toc-number">3.3.</span> <span class="toc-text">Retrofit</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 12
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/17</span><a class="archive-post-title" href="/2020/01/17/AndroidCamera-UsingCamera1/">Android Camera-Camera1使用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/14</span><a class="archive-post-title" href="/2020/01/14/AndroidCamera-Basic/">Android Camera-基础知识篇</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/13</span><a class="archive-post-title" href="/2020/01/13/AndroidCamera-Series/">Android Camera-系列文章</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/21</span><a class="archive-post-title" href="/2019/08/21/AndroidNDK-DeepUnderstandJNI/">Android NDK-深入理解JNI</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/25</span><a class="archive-post-title" href="/2019/07/25/Network-Retrofit/">Android网络编程-Retrofit源码角度分析Http</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/17</span><a class="archive-post-title" href="/2019/07/17/Network-OKHttp/">Android网络编程-OKHttp源码角度分析Http</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/15</span><a class="archive-post-title" href="/2019/07/15/Network-Cookie-Session-Token/">Android网络编程-Cookie，Session，Token</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/12</span><a class="archive-post-title" href="/2019/07/12/Network-Http/">Android网络编程-HTTP/HTTPS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href="/2019/06/26/Network-Socket/">Android网络编程-Socket</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/21</span><a class="archive-post-title" href="/2019/06/21/Network-TCP-IP/">Android网络编程-TCP/IP协议</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/14</span><a class="archive-post-title" href="/2019/06/14/Network-Basic/">Android网络编程-计算机网络基础</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/13</span><a class="archive-post-title" href="/2019/06/13/Network-Series/">Android网络编程-系列文章</a>
+        </li>
+    
+    </ul></div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="Camera"><span class="iconfont-archer">&#xe606;</span>Camera</span>
+    
+        <span class="sidebar-tag-name" data-tags="Camera2"><span class="iconfont-archer">&#xe606;</span>Camera2</span>
+    
+        <span class="sidebar-tag-name" data-tags="CameraX"><span class="iconfont-archer">&#xe606;</span>CameraX</span>
+    
+        <span class="sidebar-tag-name" data-tags="JNI"><span class="iconfont-archer">&#xe606;</span>JNI</span>
+    
+        <span class="sidebar-tag-name" data-tags="NDK"><span class="iconfont-archer">&#xe606;</span>NDK</span>
+    
+        <span class="sidebar-tag-name" data-tags="Network"><span class="iconfont-archer">&#xe606;</span>Network</span>
+    
+        <span class="sidebar-tag-name" data-tags="Session"><span class="iconfont-archer">&#xe606;</span>Session</span>
+    
+        <span class="sidebar-tag-name" data-tags="Cookie"><span class="iconfont-archer">&#xe606;</span>Cookie</span>
+    
+        <span class="sidebar-tag-name" data-tags="Token"><span class="iconfont-archer">&#xe606;</span>Token</span>
+    
+        <span class="sidebar-tag-name" data-tags="Android"><span class="iconfont-archer">&#xe606;</span>Android</span>
+    
+        <span class="sidebar-tag-name" data-tags="Http"><span class="iconfont-archer">&#xe606;</span>Http</span>
+    
+        <span class="sidebar-tag-name" data-tags="Https"><span class="iconfont-archer">&#xe606;</span>Https</span>
+    
+        <span class="sidebar-tag-name" data-tags="OKHttp"><span class="iconfont-archer">&#xe606;</span>OKHttp</span>
+    
+        <span class="sidebar-tag-name" data-tags="Retrofit"><span class="iconfont-archer">&#xe606;</span>Retrofit</span>
+    
+        <span class="sidebar-tag-name" data-tags="Socket"><span class="iconfont-archer">&#xe606;</span>Socket</span>
+    
+        <span class="sidebar-tag-name" data-tags="TCP"><span class="iconfont-archer">&#xe606;</span>TCP</span>
+    
+        <span class="sidebar-tag-name" data-tags="UDP"><span class="iconfont-archer">&#xe606;</span>UDP</span>
+    
+        <span class="sidebar-tag-name" data-tags="IP"><span class="iconfont-archer">&#xe606;</span>IP</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br>
+    1、请确保node版本大于6.2<br>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Camera"><span class="iconfont-archer">&#xe60a;</span>Camera</span>
+    
+        <span class="sidebar-category-name" data-categories="Android框架层"><span class="iconfont-archer">&#xe60a;</span>Android框架层</span>
+    
+        <span class="sidebar-category-name" data-categories="Android应用层"><span class="iconfont-archer">&#xe60a;</span>Android应用层</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Yeungeek"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+

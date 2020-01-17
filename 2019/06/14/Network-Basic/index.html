@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Yeungeek">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Yeungeek">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog,Android,yeungeek">
+    
+    <meta name="description" content="It's my Androad">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Android网络编程-计算机网络基础 · Android 沉思录</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?75ae37defe17129870bc1ba88b527367";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    
+    <!-- 谷歌统计  -->
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-37469819-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">Android 沉思录</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Android网络编程-计算机网络基础</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href="/">Android 沉思录</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:40vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Android网络编程-计算机网络基础
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Network">Network</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">2.2k</span>阅读时长: <span class="post-count reading-time">7 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/06/14</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>从本篇开始，真正进入我们的Android网络编程学习之旅。</p>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>计算机网络是利用通信设备和线路将地理位置不同的、功能独立的多个计算机系统连接起来，以功能完善的网络软件实现网络的硬件、软件及资源共享和信息传递的系统。简单的说即连接两台或多台计算机进行通信的系统。</p>
+<a id="more"></a>
+<h1 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a>计算机网络体系结构</h1><blockquote>
+<p>计算机网络体系结构可以定义为是网络协议的层次划分与各层协议的集合，同一层中的协议根据该层所要实现的功能来确定。各对等层之间的协议功能由相应的底层提供服务完成。<br>—— 百度百科</p>
+</blockquote>
+<h2 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h2><p>对于复杂的计算机网络协议，结构分层很有必要。就像Android开发中，把应用分层各个模块。<br><img src="https://s2.ax1x.com/2019/06/19/VOlsPS.png" alt="VOlsPS.png"></p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>优点：</p>
+<ul>
+<li><code>各层之间相互独立。</code>某一层并不需要知道它的下一层是如何实现的，而仅仅需要知道该层通过层间接口（即界面）所提供的服务</li>
+<li><code>灵活性好。</code>当任何一层发送变化时（例如由于技术的变化），只要层间接口关系保持不变，则在这层以上或以下各层均不受影响</li>
+<li><code>结构上可分割开。</code>各层都可以采用最合适的技术来实现</li>
+<li><code>易于实现和维护。</code> 这种结构使得实现和调试一个庞大而又复杂的系统变得易于处理，因为整个的系统已被分解为若干个相对独立的子系统</li>
+<li><code>能促进标准化工作。</code>因为每一层的功能及其所提供的服务都已有了精确的说明</li>
+</ul>
+<p>缺点：<br>各层之间会有相同的功能出现，产生额外开销。</p>
+<h2 id="体系结构"><a href="#体系结构" class="headerlink" title="体系结构"></a>体系结构</h2><p>目前有3种体系结构:</p>
+<ul>
+<li>OSI参考模型，概念清楚，理论也较完整，但它既复杂又不实用</li>
+<li>TCP/IP体系结构，是一系列网络协议的总称，目前应用最广泛</li>
+<li>五层体系结构，综合OSI和TCP/IP的优点,既简洁又能将概念阐述清楚</li>
+</ul>
+<p><a href="https://imgchr.com/i/VjDXwV" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/06/20/VjDXwV.md.png" alt="体系结构"></a></p>
+<h3 id="OSI参考模型"><a href="#OSI参考模型" class="headerlink" title="OSI参考模型"></a>OSI参考模型</h3><table>
+<thead>
+<tr>
+<th align="center">分层</th>
+<th align="left">功能</th>
+<th align="left">数据单位</th>
+<th align="left">协议栈</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">物理层</td>
+<td align="left">屏蔽传输媒体和通信手段的差异</td>
+<td align="left">比特(bit)</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">数据链路层</td>
+<td align="left">互连设备之间传送和识别数据帧</td>
+<td align="left">帧(frame)</td>
+<td align="left">点对点协议<br>以太网协议 <br>高级数据链路协议<br>帧中继</td>
+</tr>
+<tr>
+<td align="center">网络层</td>
+<td align="left">地址管理和路由选择</td>
+<td align="left">数据报(datagram)</td>
+<td align="left">IP协议<br>路由选择协议</td>
+</tr>
+<tr>
+<td align="center">传输层</td>
+<td align="left">管理两个节点之间的数据传输 <br> 负责可靠传输（确保数据被可靠地传送到目标地址）</td>
+<td align="left">报文段(segment)</td>
+<td align="left">TCP协议<br>UDP协议</td>
+</tr>
+<tr>
+<td align="center">会话层</td>
+<td align="left">通信管理。负责建立和断开通信连接（数据流动的逻辑通路）<br> 提供了数据交换定界和同步功能 <br>管理传输层一下的分层</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">表示层</td>
+<td align="left">数据压缩、加密以及数据描述</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">应用层</td>
+<td align="left">针对特定应用的协议</td>
+<td align="left">报文(message)</td>
+<td align="left">HTTP<br>DNS<br>FTP<br>SMTP<br>SSH</td>
+</tr>
+</tbody></table>
+<h3 id="TCP-IP"><a href="#TCP-IP" class="headerlink" title="TCP/IP"></a>TCP/IP</h3><p>TCP/IP的体系结构比较简单，只有四层。<br>它并不是遵循严格的 OSI 分层概念，应用程序可以直接使用 IP 层，或甚至直接使用最下面的网络接口层。可以演化成如下图所示:<br><a href="https://imgchr.com/i/Vjvt4f" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/06/20/Vjvt4f.png" alt="tcp/ip"></a></p>
+<h3 id="五层协议"><a href="#五层协议" class="headerlink" title="五层协议"></a>五层协议</h3><p>OSI的七层协议体系结构的概念清楚，理论也较完整，但它既复杂又不实用。TCP/IP 体系结构则不同，但它现在却得到了非常广泛的应用。TCP/IP 是一个四层的体系结构。在学习计算机网络的原理时往往采用折中的办法，即综合 OSI 和 TCP/IP 的优点，采用一种只有五层协议的体系结构，这样既简洁又能将概念阐述清楚。</p>
+<h2 id="五层协议中各层的主要功能"><a href="#五层协议中各层的主要功能" class="headerlink" title="五层协议中各层的主要功能"></a>五层协议中各层的主要功能</h2><p>五层协议中，没有表示层和会话层，这两层的功能留给开发者来处理。</p>
+<h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p><img src="https://s2.ax1x.com/2019/06/20/VxGwmF.png" alt="物理层"><br>在物理层，定义了以下内容：  </p>
+<ul>
+<li>接口特性<ul>
+<li>机械特性：规定了接口的几何形状等</li>
+<li>电器特性：规定了接口使用的电平大小等</li>
+<li>功能特性：规定了接口引脚个数及各项功能等</li>
+<li>规程特性：定义了接口在工作过程中遵循的相应过程。</li>
+</ul>
+</li>
+<li>比特编码：用比特对信息按照一定规则进行编码，用于传输</li>
+<li>数据率：即数据传输速率</li>
+<li>比特同步：时钟同步</li>
+<li>通讯方式:<ul>
+<li>单工通信：单向传输</li>
+<li>半双工通信：双向交替传输</li>
+<li>双工通信：双向同时传输</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p><a href="https://imgchr.com/i/VxJzDO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/06/20/VxJzDO.png" alt="数据链路层"></a><br>功能：</p>
+<ul>
+<li>负责结点-结点数据传输</li>
+<li>组桢：将网络层传下来的分组添加首部和尾部，用于标记帧的开始和结束。</li>
+<li>物理寻址：在桢头添加发送端或接收端的物理地址标识数据帧的发送端或接收端。</li>
+<li>流量控制：匹配发送端与接收端的发送速度与接收速度，避免数据淹没接收端。</li>
+<li>差错控制：检测并重传损坏或丢失帧，并避免重复帧。</li>
+<li>访问（接入）控制：在任一给定时刻决定哪个设备拥有链路（物理介质）的控制使用权。</li>
+</ul>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p><a href="https://imgchr.com/i/VxYDR1" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/06/21/VxYDR1.md.png" alt="网络层"></a><br>功能:</p>
+<ul>
+<li>负责源主机到目的主机数据分组（packet）的交付（可能穿越多个网络）。</li>
+<li>逻辑寻址：全局唯一逻辑地址，确保数据分组被送达目的主机，如IP地址（穿越多个网络时，链路层的物理寻址并不能用）。</li>
+<li>路由：路由器（或网关）互连网络，并路由分组至最终目的主机，进行路径选择。</li>
+<li>分组转发</li>
+</ul>
+<h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><p>传输层提供了进程间的逻辑通信，传输层向高层用户屏蔽了下面网络层的核心细节。<br><a href="https://imgchr.com/i/VxYHL8" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/06/21/VxYHL8.md.png" alt="传输层"></a><br>功能:</p>
+<ul>
+<li>负责源-目的（端-端）（进程间）完整报文传输</li>
+<li>报文分段与重组</li>
+<li>SAP寻址：确保将完整报文提交给正确进程，如端口号</li>
+<li>连接控制：负责端-端的连接控制（建立连接、拆除连接），是一种逻辑连接</li>
+<li>流量控制：控制端-端传输的速度</li>
+<li>差错控制：差错检测与纠正</li>
+</ul>
+<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p><a href="https://imgchr.com/i/VznKBR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/06/21/VznKBR.png" alt="应用层"></a><br>应用层直接为用户的应用进程提供服务</p>
+<h2 id="主要协议"><a href="#主要协议" class="headerlink" title="主要协议"></a>主要协议</h2><h3 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h3><p>规定网络地址的协议，叫做IP协议。它所定义的地址，就被称为IP地址。<br>IP的主要作用就是在复杂的网络环境中将数据包发给最终的目标地址。<br>相关技术：  </p>
+<ul>
+<li>DNS：域名系统，一种分布式的网络目录服务，主要用于域名与IP地址的要互转换。</li>
+<li>ARP：ARP是一种解决地址问题的协议，以目标地址为线索，用来定位下一个应该接收数据分包的网络设备对应的MAC地址。不过，ARP只适用于IPv4，不适用于IPv6。</li>
+<li>ICMP：Internet控制报文协议，作用是报告一些网络传输过程中的错误与做一些同步工作。</li>
+<li>DHCP：动态主机配置协议，实现自动设置IP地址、统一管理IP地址分配。</li>
+<li>NAT：网络地址转换，作用是将IP数据报头中的IP地址转换为另一个IP地址。</li>
+<li>IP隧道：是一种数据包封装技术，它是将原始IP包（其报头包含原始发送者和最终目的地）封装在另一个数据包（称为封装的IP包）的数据净荷中进行传输。</li>
+</ul>
+<h3 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h3><p>传输控制协议(Transmission Control Protocol)，面向连接的、可靠的流协议，提供可靠的通信传输。</p>
+<h3 id="UDP协议"><a href="#UDP协议" class="headerlink" title="UDP协议"></a>UDP协议</h3><p>用户数据报协议(User Datagram Protocol)，面向无连接的，具有不可靠性的数据报协议。</p>
+<h3 id="路由协议"><a href="#路由协议" class="headerlink" title="路由协议"></a>路由协议</h3><p>Routing protocol，是一种指定数据包转送方式的网上协议。</p>
+<h3 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h3><p>即套接字，是应用层 与 TCP/IP 协议族通信的中间软件抽象层，表现为一个封装了 TCP / IP协议族 的编程接口（API）。</p>
+<h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><p>超文本传输协议(Hyper Text Transfer Protocol)，用于从万维网服务器传输超文本到本地浏览器的传送协议。</p>
+<p><a href="/2019/06/13/Network-Series/#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">系列文章目录</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://time.geekbang.org/column/intro/85" target="_blank" rel="noopener">趣谈网络协议</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html" target="_blank" rel="noopener">互联网协议入门（一）</a></li>
+<li><a href="https://www.cnblogs.com/edisonchou/p/5987827.html" target="_blank" rel="noopener">《图解TCP/IP》读书笔记</a></li>
+<li><a href="https://github.com/CyC2018/CS-Notes/blob/master/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%20-%20%E7%9B%AE%E5%BD%95.md" target="_blank" rel="noopener">计算机网络</a></li>
+<li><a href="https://juejin.im/post/5ad7e6c35188252ebd06acfa" target="_blank" rel="noopener">面试带你飞：这是一份全面的 计算机网络基础 总结攻略</a></li>
+<li><a href="https://www.cnblogs.com/hithongming/p/9315907.html" target="_blank" rel="noopener">计算机网络的体系结构</a></li>
+<li><a href="https://blog.maplemark.cn/2019/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.html" target="_blank" rel="noopener">计算机网络体系结构</a></li>
+</ul>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://yeungeek.github.io">Yeungeek</a>
+            </p><p>原文链接：<a href="http://yeungeek.github.io/2019/06/14/Network-Basic/">http://yeungeek.github.io/2019/06/14/Network-Basic/</a>
+            </p><p>发表日期：<a href="http://yeungeek.github.io/2019/06/14/Network-Basic/">June 14th 2019, 10:58:01 pm</a>
+            </p><p>更新日期：<a href="http://yeungeek.github.io/2019/06/14/Network-Basic/">January 17th 2020, 3:44:17 am</a>
+            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2019/06/21/Network-TCP-IP/" title="Android网络编程-TCP/IP协议">
+                    <div class="nextTitle">Android网络编程-TCP/IP协议</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2019/06/13/Network-Series/" title="Android网络编程-系列文章">
+                    <div class="prevTitle">Android网络编程-系列文章</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8yODIyNi80Nzk4">
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:yeungeek@gmail.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/yeungeek" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title="wechat">
+                  
+                  <img class="profile-qr" src="/assets/wechat_qr.jpeg">
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//weibo.com/springyounger" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//twitter.com/yeungeek" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
+            
+        
+    
+        
+    
+        
+            
+                <a href="//stackoverflow.com/users/943667/yeungeek" class="iconfont-archer stack-overflow" target="_blank" title="stack-overflow"></a>
+            
+        
+    
+        
+            
+                <a href="//segmentfault.com/u/yeungeek" class="iconfont-archer segmentFault" target="_blank" title="segmentFault"></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:40vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概念"><span class="toc-number">1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#计算机网络体系结构"><span class="toc-number">2.</span> <span class="toc-text">计算机网络体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分层"><span class="toc-number">2.1.</span> <span class="toc-text">分层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优缺点"><span class="toc-number">2.1.1.</span> <span class="toc-text">优缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#体系结构"><span class="toc-number">2.2.</span> <span class="toc-text">体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OSI参考模型"><span class="toc-number">2.2.1.</span> <span class="toc-text">OSI参考模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-IP"><span class="toc-number">2.2.2.</span> <span class="toc-text">TCP/IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五层协议"><span class="toc-number">2.2.3.</span> <span class="toc-text">五层协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五层协议中各层的主要功能"><span class="toc-number">2.3.</span> <span class="toc-text">五层协议中各层的主要功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#物理层"><span class="toc-number">2.3.1.</span> <span class="toc-text">物理层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据链路层"><span class="toc-number">2.3.2.</span> <span class="toc-text">数据链路层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络层"><span class="toc-number">2.3.3.</span> <span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传输层"><span class="toc-number">2.3.4.</span> <span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用层"><span class="toc-number">2.3.5.</span> <span class="toc-text">应用层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主要协议"><span class="toc-number">2.4.</span> <span class="toc-text">主要协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP协议"><span class="toc-number">2.4.1.</span> <span class="toc-text">IP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP协议"><span class="toc-number">2.4.2.</span> <span class="toc-text">TCP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP协议"><span class="toc-number">2.4.3.</span> <span class="toc-text">UDP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由协议"><span class="toc-number">2.4.4.</span> <span class="toc-text">路由协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Socket"><span class="toc-number">2.4.5.</span> <span class="toc-text">Socket</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP协议"><span class="toc-number">2.4.6.</span> <span class="toc-text">HTTP协议</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 12
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/17</span><a class="archive-post-title" href="/2020/01/17/AndroidCamera-UsingCamera1/">Android Camera-Camera1使用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/14</span><a class="archive-post-title" href="/2020/01/14/AndroidCamera-Basic/">Android Camera-基础知识篇</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/13</span><a class="archive-post-title" href="/2020/01/13/AndroidCamera-Series/">Android Camera-系列文章</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/21</span><a class="archive-post-title" href="/2019/08/21/AndroidNDK-DeepUnderstandJNI/">Android NDK-深入理解JNI</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/25</span><a class="archive-post-title" href="/2019/07/25/Network-Retrofit/">Android网络编程-Retrofit源码角度分析Http</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/17</span><a class="archive-post-title" href="/2019/07/17/Network-OKHttp/">Android网络编程-OKHttp源码角度分析Http</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/15</span><a class="archive-post-title" href="/2019/07/15/Network-Cookie-Session-Token/">Android网络编程-Cookie，Session，Token</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/12</span><a class="archive-post-title" href="/2019/07/12/Network-Http/">Android网络编程-HTTP/HTTPS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href="/2019/06/26/Network-Socket/">Android网络编程-Socket</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/21</span><a class="archive-post-title" href="/2019/06/21/Network-TCP-IP/">Android网络编程-TCP/IP协议</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/14</span><a class="archive-post-title" href="/2019/06/14/Network-Basic/">Android网络编程-计算机网络基础</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/13</span><a class="archive-post-title" href="/2019/06/13/Network-Series/">Android网络编程-系列文章</a>
+        </li>
+    
+    </ul></div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="Camera"><span class="iconfont-archer">&#xe606;</span>Camera</span>
+    
+        <span class="sidebar-tag-name" data-tags="Camera2"><span class="iconfont-archer">&#xe606;</span>Camera2</span>
+    
+        <span class="sidebar-tag-name" data-tags="CameraX"><span class="iconfont-archer">&#xe606;</span>CameraX</span>
+    
+        <span class="sidebar-tag-name" data-tags="JNI"><span class="iconfont-archer">&#xe606;</span>JNI</span>
+    
+        <span class="sidebar-tag-name" data-tags="NDK"><span class="iconfont-archer">&#xe606;</span>NDK</span>
+    
+        <span class="sidebar-tag-name" data-tags="Network"><span class="iconfont-archer">&#xe606;</span>Network</span>
+    
+        <span class="sidebar-tag-name" data-tags="Session"><span class="iconfont-archer">&#xe606;</span>Session</span>
+    
+        <span class="sidebar-tag-name" data-tags="Cookie"><span class="iconfont-archer">&#xe606;</span>Cookie</span>
+    
+        <span class="sidebar-tag-name" data-tags="Token"><span class="iconfont-archer">&#xe606;</span>Token</span>
+    
+        <span class="sidebar-tag-name" data-tags="Android"><span class="iconfont-archer">&#xe606;</span>Android</span>
+    
+        <span class="sidebar-tag-name" data-tags="Http"><span class="iconfont-archer">&#xe606;</span>Http</span>
+    
+        <span class="sidebar-tag-name" data-tags="Https"><span class="iconfont-archer">&#xe606;</span>Https</span>
+    
+        <span class="sidebar-tag-name" data-tags="OKHttp"><span class="iconfont-archer">&#xe606;</span>OKHttp</span>
+    
+        <span class="sidebar-tag-name" data-tags="Retrofit"><span class="iconfont-archer">&#xe606;</span>Retrofit</span>
+    
+        <span class="sidebar-tag-name" data-tags="Socket"><span class="iconfont-archer">&#xe606;</span>Socket</span>
+    
+        <span class="sidebar-tag-name" data-tags="TCP"><span class="iconfont-archer">&#xe606;</span>TCP</span>
+    
+        <span class="sidebar-tag-name" data-tags="UDP"><span class="iconfont-archer">&#xe606;</span>UDP</span>
+    
+        <span class="sidebar-tag-name" data-tags="IP"><span class="iconfont-archer">&#xe606;</span>IP</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br>
+    1、请确保node版本大于6.2<br>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Camera"><span class="iconfont-archer">&#xe60a;</span>Camera</span>
+    
+        <span class="sidebar-category-name" data-categories="Android框架层"><span class="iconfont-archer">&#xe60a;</span>Android框架层</span>
+    
+        <span class="sidebar-category-name" data-categories="Android应用层"><span class="iconfont-archer">&#xe60a;</span>Android应用层</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Yeungeek"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
